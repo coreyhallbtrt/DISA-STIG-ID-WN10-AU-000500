@@ -1,0 +1,82 @@
+
+---
+
+## ⚙️ **STIG Automation Workflow: WN10-AU-000500**
+
+---
+
+### 🔐 **Phase 1: Environment Setup**
+
+1. **Log in to Azure Portal**  
+   - URL: [https://portal.azure.com](https://portal.azure.com)
+
+2. **Create a Windows 10 Virtual Machine**  
+   - If you don’t already have one, follow best practices for provisioning a Windows 10 VM.
+
+3. **Disable Windows Firewall (temporarily for scanning purposes)**  
+   - Use `wf.msc` or PowerShell:  
+     `Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False`
+
+---
+
+### 🔎 **Phase 2: Scan Configuration in Tenable**
+
+4. **Log in to Tenable Cloud**  
+   - URL: [https://cloud.tenable.com](https://cloud.tenable.com)
+
+5. **Create a New Advanced Network Scan**
+
+6. **Configure the Scan Settings**:
+   - **Scan Engine**: `LOCAL-SCAN-ENGINE-01`
+   - **Target**: Use your VM’s **Private IP address**
+   - **Credentials**: Provide valid **Windows Admin credentials** for authenticated scanning
+
+7. **Add Compliance Checks**:
+   - Go to: **Compliance → Add Check**
+   - Search and select: **DISA Windows 10 STIG v3r1**
+
+---
+
+### ⚡ **Phase 3: Speed Optimization (Optional)**
+
+8. **Optimize for STIG-Only Compliance Scanning**
+   - **Disable all plugins**
+   - Enable only:  
+     `Policy Compliance → Windows Compliance Checks`
+
+---
+
+### 🧪 **Phase 4: Run and Analyze Initial Scan**
+
+9. **Run a Baseline Scan**  
+   - Wait for the scan to complete and analyze the results.
+
+10. **Identify Failed STIGs**
+    - Choose one failed STIG to focus on for remediation.  
+    - **Lab Target**: `WN10-AU-000500` — Application Event Log size must be 32,768 KB or greater.
+
+---
+
+### 🔧 **Phase 5: Manual Remediation Research & Implementation**
+
+11. **Research the STIG ID Online**  
+    - Google search:  
+      [https://www.google.com/search?q="WN10-AU-000500"](https://www.google.com/search?q=%22WN10-AU-000500%22)  
+    - Use DISA, Microsoft, or trusted STIG resources to find registry-based remediation steps.
+
+12. **Manually Apply the Fix** (for WN10-AU-000500):
+    - Navigate to:  
+      `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application`
+    - Create the missing registry keys if needed.
+    - Add a `DWORD (32-bit)` value named **MaxSize** and set it to **32768 (decimal)**.
+
+13. **Restart the Virtual Machine**
+
+---
+
+### ✅ **Phase 6: Validation**
+
+14. **Run Another STIG Scan in Tenable**  
+    - Confirm that **WN10-AU-000500** is now marked as **compliant**.
+
+---
