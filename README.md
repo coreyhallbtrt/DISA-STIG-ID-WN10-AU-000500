@@ -1,5 +1,8 @@
 # DISA-STIG-ID-WN10-AU-000500
 
+SCENARIO 
+https://github.com/coreyhallbtrt/DISA-STIG-ID-WN10-AU-000500/blob/main/WN10-AU-000500%20SCENARIO
+
 ---
 
 ## 🛠️ Manual Remediation Summary for DISA-STIG: WN10-AU-000500  
